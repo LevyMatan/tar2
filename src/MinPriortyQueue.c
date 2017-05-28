@@ -75,7 +75,10 @@ void BubbleDown(MinPriorityQueue* minpq, int nodeIndex) {
 	int minValue = minpq->arr[nodeIndex];
 	for (int childNum = 1; childNum <= minpq->arity; childNum++) {
 		childIndex = ChildIndex(minpq, nodeIndex, childNum);
-		if (childIndex != -1 && minValue > minpq->arr[childIndex]) {
+		if (childIndex == -1) {
+			break;
+		}
+		else if ( minValue > minpq->arr[childIndex]) {
 			minChildIndex = childIndex;
 			minValue = minpq->arr[childIndex];
 		}
@@ -99,7 +102,25 @@ void BubbleDown(MinPriorityQueue* minpq, int nodeIndex) {
 void BubbleUp(MinPriorityQueue* minpq, int nodeIndex) {
 	int parentIndex;
 	/* YOUR CODE STARTS HERE */
+	int key, i = nodeIndex;
+	// make sure we have a valid nodeIndex
+	if (i < 0) {
+		printf("You tried to bubble up an element which his index exceeds the array dimensions: lower then 0");
+		return;
+	} 
+	if (i > LastIndex(minpq)) {
+		printf("You tried to bubble up an element which his index exceeds the array dimensions: above LastIndex()");
+		return;
+	}
 
+	parentIndex = ParentIndex(minpq, i);
+	key = minpq->arr[i];
+	while (i > 0 && minpq->arr[parentIndex] > key) {
+		minpq->arr[i] = minpq->arr[parentIndex];
+		i = parentIndex;
+		parentIndex = ParentIndex(minpq, i);
+	}
+	minpq->arr[i] = key;
 	/* YOUR CODE ENDS HERE */
 }
 
@@ -125,7 +146,10 @@ void InsertToMinPQ(MinPriorityQueue* minpq, int data) {
 		return;
 	}
 	/* YOUR CODE STARTS HERE */
-
+	// extend heap by one
+	minpq->used++;
+	minpq->arr[LastIndex(minpq)] = data;
+	BubbleUp(minpq, LastIndex(minpq));
 	/* YOUR CODE ENDS HERE */
 }
 
