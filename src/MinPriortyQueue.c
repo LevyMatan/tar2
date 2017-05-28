@@ -73,7 +73,7 @@ void BubbleDown(MinPriorityQueue* minpq, int nodeIndex) {
 	PrintMinPQ(minpq);
 	// find min value of all children
 	int minValue = minpq->arr[nodeIndex];
-	for (int childNum = 1; childNum <= minpq->arity; childNum++) {
+	for (childNum = 1; childNum <= minpq->arity; childNum++) {
 		childIndex = ChildIndex(minpq, nodeIndex, childNum);
 		if (childIndex == -1) {
 			break;
@@ -126,6 +126,8 @@ void BubbleUp(MinPriorityQueue* minpq, int nodeIndex) {
 
 MinPriorityQueue* CreateMinPriortyQueue(int limit, int arity) {
 	MinPriorityQueue* minpq = (MinPriorityQueue*)malloc(sizeof(MinPriorityQueue));
+	if (!minpq)
+		exit(1);
 	minpq->arr = (int*)malloc(sizeof(int)*limit);
 	minpq->limit = limit;
 	minpq->arity = arity;
