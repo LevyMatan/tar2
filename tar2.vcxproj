@@ -142,6 +142,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\assignment2.c" />
+    <ClCompile Include="src\LinkedList.c" />
+    <ClCompile Include="src\MinPriortyQueue.c" />
+    <ClCompile Include="src\Queue.c" />
+    <ClCompile Include="src\SortingAlgorithms.c" />
+    <ClCompile Include="src\SortingAlgorithmsUtil.c" />
+    <ClCompile Include="src\Stack.c" />
+    <ClCompile Include="src\Util.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\LinkedList.h" />
+    <ClInclude Include="src\MinPriorityQueue.h" />
+    <ClInclude Include="src\Queue.h" />
+    <ClInclude Include="src\SortingAlgorithms.h" />
+    <ClInclude Include="src\SortingAlgorithmsUtil.h" />
+    <ClInclude Include="src\Stack.h" />
+    <ClInclude Include="src\Util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
