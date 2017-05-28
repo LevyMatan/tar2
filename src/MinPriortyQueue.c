@@ -16,12 +16,13 @@ int LastIndex(MinPriorityQueue* minpq) {
 // Returns the index of the 'childNum'th child of the node represented by the given 'parentIndex'
 // in the given 'minpq'. Returns -1 if such child does not exist.
 // RUNTIME: Runs in O(1).
+// COMPLETED
 int ChildIndex(MinPriorityQueue* minpq, int parentIndex, int childNum) {
 	int childIndex;
 	/* YOUR CODE STARTS HERE */
 	// The children of a certain parent are follow the indexing rule: arity*ParentIndex + childNum
 	childIndex = minpq->arity * parentIndex + childNum;
-	return (childIndex > LastIndex(minpq)) ? (-1) : (childIndex);
+	return ( childIndex > LastIndex(minpq) ) ? (-1) : (childIndex);
 	/* YOUR CODE ENDS HERE */
 }
 
@@ -68,6 +69,22 @@ void PrintMinPQ(MinPriorityQueue* minpq) {
 void BubbleDown(MinPriorityQueue* minpq, int nodeIndex) {
 	int childNum, childIndex, minChildIndex = nodeIndex;
 	/* YOUR CODE STARTS HERE */
+	// DEBUG
+	PrintMinPQ(minpq);
+	// find min value of all children
+	int minValue = minpq->arr[nodeIndex];
+	for (int childNum = 1; childNum <= minpq->arity; childNum++) {
+		childIndex = ChildIndex(minpq, nodeIndex, childNum);
+		if (childIndex != -1 && minValue > minpq->arr[childIndex]) {
+			minChildIndex = childIndex;
+			minValue = minpq->arr[childIndex];
+		}
+	}
+	// if not in right place, bubble down
+	if (minChildIndex != nodeIndex) {
+		SwapIndices(minpq->arr, minChildIndex, nodeIndex);
+		BubbleDown(minpq, minChildIndex);
+	}
 
 	/* YOUR CODE ENDS HERE */
 }
