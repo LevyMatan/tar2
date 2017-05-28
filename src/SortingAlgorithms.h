@@ -7,7 +7,21 @@ void AscendingHeapSort(int* arr, int size, int arity);
 // Sorts the given 'arr' array of size 'size' in a descending order using a MinPriorityQueue
 // with arity 'arity'.
 // RUNTIME: O(nlogn).
-void DescendingHeapSort(int* arr, int size, int arity);
+inline void DescendingHeapSort(int* arr, int size, int arity) {
+	MinPriorityQueue* minpq = CreateMinPriortyQueue(size, arity);
+	int i;
+
+	/* YOUR CODE STARTS HERE */
+	minpq->arr = arr;
+	// Build MinPQ
+	minpq->used = size;
+	for (i = size / arity; i > 0; i--) {
+
+	}
+	/* YOUR CODE ENDS HERE */
+
+	FreeMinPQ(minpq);
+}
 
 // Sorts the given 'arr' array of size 'size' using Quicksort in a non-recursive manner - 
 // using a single stack which is limited to holding (2 * cieling(log(n))) elements.
