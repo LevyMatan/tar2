@@ -1,5 +1,6 @@
 #include "MinPriorityQueue.h"
 
+
 struct minPriorityQueue {
 	int * arr;
 	int arity;
@@ -18,7 +19,9 @@ int LastIndex(MinPriorityQueue* minpq) {
 int ChildIndex(MinPriorityQueue* minpq, int parentIndex, int childNum) {
 	int childIndex;
 	/* YOUR CODE STARTS HERE */
-
+	// The children of a certain parent are follow the indexing rule: arity*ParentIndex + childNum
+	childIndex = minpq->arity * parentIndex + childNum;
+	return (childIndex > LastIndex(minpq)) ? (-1) : (childIndex);
 	/* YOUR CODE ENDS HERE */
 }
 
