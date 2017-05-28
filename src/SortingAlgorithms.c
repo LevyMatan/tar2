@@ -7,7 +7,6 @@ void AscendingHeapSort(int* arr, int size, int arity) {
 	int i;
 
 	/* YOUR CODE STARTS HERE */
-
 	/* YOUR CODE ENDS HERE */
 
 	FreeMinPQ(minpq);
@@ -18,7 +17,7 @@ void DescendingHeapSort(int* arr, int size, int arity) {
 	int i;
 
 	/* YOUR CODE STARTS HERE */
-
+	minpq->used = size;
 	/* YOUR CODE ENDS HERE */
 
 	FreeMinPQ(minpq);

@@ -27,9 +27,6 @@
     <ClCompile Include="src\Queue.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\SortingAlgorithms.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\SortingAlgorithmsUtil.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -37,6 +34,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Util.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SortingAlgorithms.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

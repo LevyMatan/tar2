@@ -161,7 +161,7 @@ void RunBuiltInMode() {
 
 void main() {
 	int choice;
-
+	
 	printf("Choose run-mode:\n");
 	printf("1. Input choices manually\n");
 	printf("2. Run built-in benchmark\n");
