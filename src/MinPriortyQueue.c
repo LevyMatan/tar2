@@ -167,7 +167,10 @@ int ExtractMinPQMinimum(MinPriorityQueue* minpq) {
 		return INT_MAX;
 	}
 	/* YOUR CODE STARTS HERE */
-
+	// replace the min value with the last element in the MinPQMinimum
+	SwapIndices(minpq->arr, 0, LastIndex(minpq));
+	// reduce the size of the MinPQMinimum
+	minpq->used--;
 	/* YOUR CODE ENDS HERE */
 	return minpq->arr[LastIndex(minpq) + 1];
 }
