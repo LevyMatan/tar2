@@ -17,7 +17,7 @@ Queue* CreateQueue(int limit) {
 
 BOOL IsQueueEmpty(Queue* queue) {
 	/* YOUR CODE STARTS HERE */
-
+	return (queue->used == 0);
 	/* YOUR CODE ENDS HERE */
 }
 
@@ -33,7 +33,7 @@ void Enqueue(Queue* queue, int data) {
 		return;
 	}
 	/* YOUR CODE STARTS HERE */
-
+	InsertToListTail(queue->dataList, CreateNode(data));
 	/* YOUR CODE ENDS HERE */
 	queue->used++;
 }

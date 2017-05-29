@@ -4,7 +4,7 @@
 // When enabled, you will still need to insert calls for printing functions in order to actually
 // have them printed. Forgetting calls to printing functions in the code should not cause
 // any problem when this is set to '0'.
-#define DEBUG 1
+#define DEBUG 0
 
 #define TRUE 1
 #define FALSE 0
