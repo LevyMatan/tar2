@@ -48,7 +48,7 @@ int Dequeue(Queue* queue) {
 		return INT_MIN;
 	}
 	/* YOUR CODE STARTS HERE */
-
+	first = RemoveFromListHead(queue->dataList);
 	/* YOUR CODE ENDS HERE */
 	data = GetNodeData(first);
 	free(first);
