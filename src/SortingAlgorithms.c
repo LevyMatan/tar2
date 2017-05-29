@@ -17,7 +17,13 @@ void DescendingHeapSort(int* arr, int size, int arity) {
 	int i;
 
 	/* YOUR CODE STARTS HERE */
-	minpq->used = size;
+	// build heap
+	for (i = 0; i < size; i++) {
+		InsertToMinPQ(minpq, arr[i]);
+		PrintMinPQ(minpq);
+	}
+
+	
 	/* YOUR CODE ENDS HERE */
 
 	FreeMinPQ(minpq);
