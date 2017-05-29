@@ -1,7 +1,7 @@
 #include "MinPriorityQueue.h"
 #include "SortingAlgorithms.h"
 #include "SortingAlgorithmsUtil.h"
-
+//COMPLETED
 void AscendingHeapSort(int* arr, int size, int arity) {
 	MinPriorityQueue* minpq = CreateMinPriortyQueue(size, arity);
 	int i;
@@ -18,7 +18,7 @@ void AscendingHeapSort(int* arr, int size, int arity) {
 
 	FreeMinPQ(minpq);
 }
-
+//COMPLETED
 void DescendingHeapSort(int* arr, int size, int arity) {
 	MinPriorityQueue* minpq = CreateMinPriortyQueue(size, arity);
 	int i;
@@ -49,8 +49,16 @@ int Partition(int* arr, int p, int r) {
 	int q = p;
 	int j;
 
+	//PrintIntArray(arr, r - p + 1);
 	/* YOUR CODE STARTS HERE */
-
+	for (j = p; j < r; j++) {
+		PrintPartitionState(arr, r-p+1, p, r, pivot, q, j);
+		if (arr[j] < pivot) {
+			SwapIndices(arr, j, q);
+			q++;
+		}
+	}
+	SwapIndices(arr, r, q);
 	/* YOUR CODE ENDS HERE */
 	
 	return q;
@@ -68,7 +76,23 @@ void SmartPartition(int* arr, int size, int p, int r, int *qRes, int *tRes) {
 	int j;
 	
 	/* YOUR CODE STARTS HERE */
-
+	for (j = p; j < r; j++) {
+		PrintSmartPartitionState(arr, size, p, r, pivot, q, t, j);
+		if (arr[j] < pivot) {
+			SwapIndices(arr, j, q);
+			if (t != q) {
+				SwapIndices(arr, j, t);
+			}			
+			q++;
+			t++;
+		}
+		else if (arr[j] == pivot) {
+			SwapIndices(arr, j, t);
+			t++;
+		}
+		PrintSmartPartitionState(arr, size, p, r, pivot, q, t, j);
+	}
+	SwapIndices(arr, r, t);
 	/* YOUR CODE ENDS HERE */
 
 	(*qRes) = q;
@@ -101,6 +125,12 @@ void EqualElementQuickSort(int* arr, int size, int p, int r) {
 	int q, t;
 
 	/* YOUR CODE STARTS HERE */
+	//Testing partition
+	if (p < r) {
+		SmartPartition(arr, size, p, r, &q, &t);
+		EqualElementQuickSort(arr, q-p, p, q-1);
+		EqualElementQuickSort(arr, r-t, t+1, r);
+	}
 
 	/* YOUR CODE ENDS HERE */
 }
