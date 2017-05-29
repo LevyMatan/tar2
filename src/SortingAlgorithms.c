@@ -7,6 +7,13 @@ void AscendingHeapSort(int* arr, int size, int arity) {
 	int i;
 
 	/* YOUR CODE STARTS HERE */
+	for (i = 0; i < size; i++) {
+		InsertToMinPQ(minpq, arr[i]);
+	}
+	// take the minmium element in the Queue and place it in the end of the array
+	for (i = 0; i < size; i++) {
+		arr[i] = ExtractMinPQMinimum(minpq);
+	}
 	/* YOUR CODE ENDS HERE */
 
 	FreeMinPQ(minpq);
@@ -20,7 +27,10 @@ void DescendingHeapSort(int* arr, int size, int arity) {
 	// build heap
 	for (i = 0; i < size; i++) {
 		InsertToMinPQ(minpq, arr[i]);
-		PrintMinPQ(minpq);
+	}
+	// take the minmium element in the Queue and place it in the end of the array
+	for (i = size - 1; i > -1; i--) {
+		arr[i] = ExtractMinPQMinimum(minpq);
 	}
 
 	

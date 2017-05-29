@@ -70,7 +70,7 @@ void BubbleDown(MinPriorityQueue* minpq, int nodeIndex) {
 	int childNum, childIndex, minChildIndex = nodeIndex;
 	/* YOUR CODE STARTS HERE */
 	// DEBUG
-	PrintMinPQ(minpq);
+	//PrintMinPQ(minpq);
 	// find min value of all children
 	int minValue = minpq->arr[nodeIndex];
 	for (childNum = 1; childNum <= minpq->arity; childNum++) {
@@ -115,7 +115,7 @@ void BubbleUp(MinPriorityQueue* minpq, int nodeIndex) {
 
 	parentIndex = ParentIndex(minpq, i);
 	key = minpq->arr[i];
-	while (i > 0 && minpq->arr[parentIndex] > key) {
+	while (i > -1 && minpq->arr[parentIndex] > key) {
 		minpq->arr[i] = minpq->arr[parentIndex];
 		i = parentIndex;
 		parentIndex = ParentIndex(minpq, i);
@@ -171,6 +171,8 @@ int ExtractMinPQMinimum(MinPriorityQueue* minpq) {
 	SwapIndices(minpq->arr, 0, LastIndex(minpq));
 	// reduce the size of the MinPQMinimum
 	minpq->used--;
+	// bubbleDown the last elemnt which is now at the root to satisfy the heap property
+	BubbleDown(minpq, 0);
 	/* YOUR CODE ENDS HERE */
 	return minpq->arr[LastIndex(minpq) + 1];
 }
