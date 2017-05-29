@@ -44,6 +44,7 @@ void DescendingHeapSort(int* arr, int size, int arity) {
 // All elements before the returned indices should be smaller than arr[r], while all elements
 // after it should be equal or larger from it.
 // RUNTIME: Runs in O(p-r).
+// TODO
 int Partition(int* arr, int p, int r) {
 	int pivot = arr[r];
 	int q = p;
@@ -70,6 +71,7 @@ int Partition(int* arr, int p, int r) {
 // Updates 'qRes' to hold the start of the (elements equal to pivot) sub-array.
 // Updates 'tRes' to hold the index of 'pivot'.
 // RUNTIME: Runs in O(p-r).
+// COMPLETED
 void SmartPartition(int* arr, int size, int p, int r, int *qRes, int *tRes) {
 	int pivot = arr[r];
 	int q = p, t = p;
@@ -98,18 +100,28 @@ void SmartPartition(int* arr, int size, int p, int r, int *qRes, int *tRes) {
 	(*qRes) = q;
 	(*tRes) = t;
 }
-
+// TODO
 void StackBasedQuickSort(int* arr, int size) {
 	Stack* stack = CreateStack(QuicksortDataStructureLimit(size));
 	int p = -1, q = -1, r = -1;
-
+	p = 0;
+	r = p + size;
+	q = r;
 	/* YOUR CODE STARTS HERE */
-
+	while(p < q-1) {
+		q = Partition(arr, p, q-1);
+		Push(stack, q);
+		q = Partition(arr, q, q - 1);
+	}
+	while () {
+		q = p
+	}
+	q = Partition(arr, p, p + size - 1);
 	/* YOUR CODE ENDS HERE */
 
 	FreeStack(stack);
 }
-
+// TODO
 void QueueBasedQuickSort(int* arr, int size) {
 	Queue* queue = CreateQueue(QuicksortDataStructureLimit(size));
 	int p = -1, q = -1, r = -1;
@@ -120,7 +132,7 @@ void QueueBasedQuickSort(int* arr, int size) {
 
 	FreeQueue(queue);
 }
-
+// COMPLETED
 void EqualElementQuickSort(int* arr, int size, int p, int r) {
 	int q, t;
 
@@ -162,7 +174,7 @@ void CountingSort(IntPair* arr, int size, int limit) {
 	free(b);
 	free(c);
 }
-
+// TODO
 void nModuluRadixSort(int* arr, int size, int limit) {
 	IntPair *a = (IntPair*)malloc(sizeof(IntPair)*size);
 	int i, denominator = 1;
