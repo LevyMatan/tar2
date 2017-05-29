@@ -77,7 +77,7 @@ void SmartPartition(int* arr, int size, int p, int r, int *qRes, int *tRes) {
 	
 	/* YOUR CODE STARTS HERE */
 	for (j = p; j < r; j++) {
-		PrintSmartPartitionState(arr, size, p, r, pivot, q, t, j);
+		//PrintSmartPartitionState(arr, size, p, r, pivot, q, t, j);
 		if (arr[j] < pivot) {
 			SwapIndices(arr, j, q);
 			if (t != q) {
@@ -90,7 +90,7 @@ void SmartPartition(int* arr, int size, int p, int r, int *qRes, int *tRes) {
 			SwapIndices(arr, j, t);
 			t++;
 		}
-		PrintSmartPartitionState(arr, size, p, r, pivot, q, t, j);
+		//PrintSmartPartitionState(arr, size, p, r, pivot, q, t, j);
 	}
 	SwapIndices(arr, r, t);
 	/* YOUR CODE ENDS HERE */
