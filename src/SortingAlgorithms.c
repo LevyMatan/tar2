@@ -112,12 +112,10 @@ void StackBasedQuickSort(int* arr, int size) {
 	while ( !IsStackEmpty(stack) ) {
 		r = Pop(stack);
 		p = Pop(stack);
-		if (r-1 < p) continue;
+		if (!IsValidSubArray(p, r, size)) continue;
 		q = Partition(arr, p, r);
-		Push(stack, q);
-		Push(stack, r);
-		Push(stack, p);
-		Push(stack, q-1);
+		MaybePushIndices(stack, q + 1, r, size); // Indecies for right array = [q+1, r]
+		MaybePushIndices(stack, p, q - 1, size); // Indecies for left array = [p, q-1]
 	}
 
 	/* YOUR CODE ENDS HERE */
