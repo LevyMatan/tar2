@@ -174,7 +174,7 @@ void CountingSort(IntPair* arr, int size, int limit) {
 	free(b);
 	free(c);
 }
-// TODO
+// COMPLETED
 void nModuluRadixSort(int* arr, int size, int limit) {
 	IntPair *a = (IntPair*)malloc(sizeof(IntPair)*size);
 	int i, denominator = 1;
@@ -184,7 +184,21 @@ void nModuluRadixSort(int* arr, int size, int limit) {
 	}
 
 	/* YOUR CODE STARTS HERE */
-
+	int not_zeros; 
+	for (int d = 1; d < INT_MAX; d++) { // limit the number of digits to INT_MAX (actually can use much lower number...)
+		//PrintnModuluRadixSortState(arr, a, size, limit, denominator);
+		not_zeros = 0;
+		for (i = 0; i < size; i++) {
+			a[i].second = (a[i].first % (denominator*limit)) / denominator; // extract the 'd' digit of the number on base 'limit'
+			if (a[i].second)												// if all the elemnt in the array has the 'd' digit equal to zero, assumes this is the last digit.
+				not_zeros = 1;
+		}
+		if (!not_zeros)
+			break;
+		CountingSort(a, size, limit-1);										// Stable sort algorithm to sort the array of the i'th digit
+		denominator *= limit;												// increase power of denominator by one, denominator = limit^(d+1)
+	}
+		
 	/* YOUR CODE ENDS HERE */
 
 	for (i = 0; i < size; i++) {
