@@ -50,19 +50,19 @@ int Partition(int* arr, int p, int r) {
 	int q = p;
 	int j;
 
-	//PrintIntArray(arr, r - p + 1);
 	/* YOUR CODE STARTS HERE */
-	for (j = p; j < r; j++) {
-		PrintPartitionState(arr, r-p+1, p, r, pivot, q, j);
+	SwapIndices(arr, r, p);
+	q++;
+	for (j = p + 1; j < r + 1; j++) {
 		if (arr[j] < pivot) {
 			SwapIndices(arr, j, q);
 			q++;
 		}
 	}
-	SwapIndices(arr, r, q);
+	SwapIndices(arr, q-1, p);
 	/* YOUR CODE ENDS HERE */
 	
-	return q;
+	return q-1;
 }
 
 // Works on the sub-array given by 'p' (as lower bound) and 'r' (as higher bound).
@@ -100,23 +100,26 @@ void SmartPartition(int* arr, int size, int p, int r, int *qRes, int *tRes) {
 	(*qRes) = q;
 	(*tRes) = t;
 }
-// TODO
+// COMPLETED
 void StackBasedQuickSort(int* arr, int size) {
 	Stack* stack = CreateStack(QuicksortDataStructureLimit(size));
 	int p = -1, q = -1, r = -1;
-	p = 0;
-	r = p + size;
-	q = r;
+	
 	/* YOUR CODE STARTS HERE */
-	while(p < q-1) {
-		q = Partition(arr, p, q-1);
+
+	Push(stack, 0);
+	Push(stack, size-1);
+	while ( !IsStackEmpty(stack) ) {
+		r = Pop(stack);
+		p = Pop(stack);
+		if (r-1 < p) continue;
+		q = Partition(arr, p, r);
 		Push(stack, q);
-		q = Partition(arr, q, q - 1);
+		Push(stack, r);
+		Push(stack, p);
+		Push(stack, q-1);
 	}
-	while () {
-		q = p
-	}
-	q = Partition(arr, p, p + size - 1);
+
 	/* YOUR CODE ENDS HERE */
 
 	FreeStack(stack);
