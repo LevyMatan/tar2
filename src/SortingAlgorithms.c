@@ -51,18 +51,17 @@ int Partition(int* arr, int p, int r) {
 	int j;
 
 	/* YOUR CODE STARTS HERE */
-	SwapIndices(arr, r, p);
-	q++;
-	for (j = p + 1; j < r + 1; j++) {
+
+	for (j = p ; j < r ; j++) {
 		if (arr[j] < pivot) {
 			SwapIndices(arr, j, q);
 			q++;
 		}
 	}
-	SwapIndices(arr, q-1, p);
+	SwapIndices(arr, q, r);
 	/* YOUR CODE ENDS HERE */
 	
-	return q-1;
+	return q;
 }
 
 // Works on the sub-array given by 'p' (as lower bound) and 'r' (as higher bound).
