@@ -44,7 +44,7 @@ void DescendingHeapSort(int* arr, int size, int arity) {
 // All elements before the returned indices should be smaller than arr[r], while all elements
 // after it should be equal or larger from it.
 // RUNTIME: Runs in O(p-r).
-// TODO
+// Completed
 int Partition(int* arr, int p, int r) {
 	int pivot = arr[r];
 	int q = p;
