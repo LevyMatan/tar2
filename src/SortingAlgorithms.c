@@ -1,7 +1,7 @@
 #include "MinPriorityQueue.h"
 #include "SortingAlgorithms.h"
 #include "SortingAlgorithmsUtil.h"
-//COMPLETED
+// COMPLETED!!!
 void AscendingHeapSort(int* arr, int size, int arity) {
 	MinPriorityQueue* minpq = CreateMinPriortyQueue(size, arity);
 	int i;
@@ -18,7 +18,7 @@ void AscendingHeapSort(int* arr, int size, int arity) {
 
 	FreeMinPQ(minpq);
 }
-//COMPLETED
+// COMPLETED!!!
 void DescendingHeapSort(int* arr, int size, int arity) {
 	MinPriorityQueue* minpq = CreateMinPriortyQueue(size, arity);
 	int i;
@@ -44,7 +44,7 @@ void DescendingHeapSort(int* arr, int size, int arity) {
 // All elements before the returned indices should be smaller than arr[r], while all elements
 // after it should be equal or larger from it.
 // RUNTIME: Runs in O(p-r).
-// Completed
+// COMPLETED!!!
 int Partition(int* arr, int p, int r) {
 	int pivot = arr[r];
 	int q = p;
@@ -70,7 +70,7 @@ int Partition(int* arr, int p, int r) {
 // Updates 'qRes' to hold the start of the (elements equal to pivot) sub-array.
 // Updates 'tRes' to hold the index of 'pivot'.
 // RUNTIME: Runs in O(p-r).
-// COMPLETED
+// COMPLETED!!!
 void SmartPartition(int* arr, int size, int p, int r, int *qRes, int *tRes) {
 	int pivot = arr[r];
 	int q = p, t = p;
@@ -99,7 +99,7 @@ void SmartPartition(int* arr, int size, int p, int r, int *qRes, int *tRes) {
 	(*qRes) = q;
 	(*tRes) = t;
 }
-// COMPLETED
+// COMPLETED!!!
 void StackBasedQuickSort(int* arr, int size) {
 	Stack* stack = CreateStack(QuicksortDataStructureLimit(size));
 	int p = -1, q = -1, r = -1;
@@ -127,12 +127,22 @@ void QueueBasedQuickSort(int* arr, int size) {
 	int p = -1, q = -1, r = -1;
 
 	/* YOUR CODE STARTS HERE */
-
+	Enqueue(queue, 0);			// first p
+	Enqueue(queue, size - 1);	// first r
+	while (!IsQueueEmpty(queue)) {
+		p = Dequeue(queue);
+		r = Dequeue(queue);
+		if (!IsValidSubArray(p, r, size)) continue;
+		q = Partition(arr, p, r);
+		MaybeEnqueueIndices(queue, p, q-1, size); // Indecies for left array = [p, q-1]
+		MaybeEnqueueIndices(queue, q+1, r, size); // Indecies for right array = [q+1, r]
+		//PrintQueueQuickSortState(queue, arr, p, q, r, size);
+	}
 	/* YOUR CODE ENDS HERE */
 
 	FreeQueue(queue);
 }
-// COMPLETED
+// COMPLETED!!!
 void EqualElementQuickSort(int* arr, int size, int p, int r) {
 	int q, t;
 
@@ -174,7 +184,7 @@ void CountingSort(IntPair* arr, int size, int limit) {
 	free(b);
 	free(c);
 }
-// COMPLETED
+// COMPLETED!!!
 void nModuluRadixSort(int* arr, int size, int limit) {
 	IntPair *a = (IntPair*)malloc(sizeof(IntPair)*size);
 	int i, denominator = 1;
