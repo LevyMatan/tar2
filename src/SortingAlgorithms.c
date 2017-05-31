@@ -113,7 +113,7 @@ void StackBasedQuickSort(int* arr, int size) {
 		p = Pop(stack);
 		if (!IsValidSubArray(p, r, size)) continue;
 		q = Partition(arr, p, r);
-		if ((q - p) <= (r - q)) {
+		if (IsValidSubArray(q + 1, r, size) && ((q - p) <= (r - q))) {
 			MaybePushIndices(stack, q + 1, r, size); // Indecies for right array = [q+1, r]
 			MaybePushIndices(stack, p, q - 1, size); // Indecies for left array = [p, q-1]
 		}
@@ -134,25 +134,32 @@ void QueueBasedQuickSort(int* arr, int size) {
 	int p = -1, q = -1, r = -1;
 
 	/* YOUR CODE STARTS HERE */
+	int right_len, left_len;
 	Enqueue(queue, 0);			// first p
 	Enqueue(queue, size - 1);	// first r
 	while (!IsQueueEmpty(queue)) {
+
 		p = Dequeue(queue);
 		r = Dequeue(queue);
-		if (!IsValidSubArray(p, r, size)) 
-			continue;
+
 		q = Partition(arr, p, r);
-		// We would like to insert the bigger subarray first to guarntee log(n) size of queue
-		if ((q - p) < (r - q)) {
-			MaybeEnqueueIndices(queue, p, q - 1, size); // Indecies for left array = [p, q-1]
-			MaybeEnqueueIndices(queue, q + 1, r, size); // Indecies for right array = [q+1, r]
+
+		right_len = IsValidSubArray(q + 1, r, size) ? r - q : INT_MAX;
+		left_len = IsValidSubArray(p, q - 1, size) ? q - p : INT_MAX;
+
+		PrintQueueQuickSortState(queue, arr, p, q, r, size);
+
+		// We would like to insert the smaller subarray first to guarntee log(n) size of queue
+		if (right_len < left_len) {
+			MaybeEnqueueIndices(queue, q + 1, r, size);
+			MaybeEnqueueIndices(queue, p, q - 1, size);
 		}
 		else {
-			MaybeEnqueueIndices(queue, q + 1, r, size); // Indecies for right array = [q+1, r]
-			MaybeEnqueueIndices(queue, p, q - 1, size); // Indecies for left array = [p, q-1]
+			MaybeEnqueueIndices(queue, p, q - 1, size);
+			MaybeEnqueueIndices(queue, q + 1, r, size);
 		}
 		
-		//PrintQueueQuickSortState(queue, arr, p, q, r, size);
+
 	}
 	/* YOUR CODE ENDS HERE */
 
