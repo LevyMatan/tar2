@@ -139,26 +139,27 @@ void QueueBasedQuickSort(int* arr, int size) {
 	Enqueue(queue, size - 1);	// first r
 	while (!IsQueueEmpty(queue)) {
 
-		p = Dequeue(queue);
 		r = Dequeue(queue);
+		p = Dequeue(queue);
+		while (IsValidSubArray(p, r, size)) {
 
-		q = Partition(arr, p, r);
+			q = Partition(arr, p, r);
 
-		right_len = IsValidSubArray(q + 1, r, size) ? r - q : INT_MAX;
-		left_len = IsValidSubArray(p, q - 1, size) ? q - p : INT_MAX;
+			right_len = IsValidSubArray(q + 1, r, size) ? r - q : INT_MAX;
+			left_len = IsValidSubArray(p, q - 1, size) ? q - p : INT_MAX;
 
-		PrintQueueQuickSortState(queue, arr, p, q, r, size);
+			//PrintQueueQuickSortState(queue, arr, p, q, r, size);
 
-		// We would like to insert the smaller subarray first to guarntee log(n) size of queue
-		if (right_len < left_len) {
-			MaybeEnqueueIndices(queue, q + 1, r, size);
-			MaybeEnqueueIndices(queue, p, q - 1, size);
+			// We would like to insert the smaller subarray first to guarntee log(n) size of queue
+			if (right_len < left_len) {
+				MaybeEnqueueIndices(queue, p, q - 1, size);
+				p = q + 1;
+			}
+			else {
+				MaybeEnqueueIndices(queue, q + 1, r, size);
+				r = q - 1;
+			}
 		}
-		else {
-			MaybeEnqueueIndices(queue, p, q - 1, size);
-			MaybeEnqueueIndices(queue, q + 1, r, size);
-		}
-		
 
 	}
 	/* YOUR CODE ENDS HERE */

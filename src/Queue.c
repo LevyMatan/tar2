@@ -33,7 +33,7 @@ void Enqueue(Queue* queue, int data) {
 		return;
 	}
 	/* YOUR CODE STARTS HERE */
-	InsertToListTail(queue->dataList, CreateNode(data));
+	InsertToListHead(queue->dataList, CreateNode(data));
 	/* YOUR CODE ENDS HERE */
 	queue->used++;
 }
